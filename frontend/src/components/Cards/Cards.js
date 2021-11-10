@@ -47,6 +47,38 @@ const Cards = (props) => {
                 border="info"
                 text="white"
             >
+                <Card.Header as="h4">{props.title4}</Card.Header>
+                <Card.Body>
+                <Card.Text as="h5">
+                    {props.text4}
+                </Card.Text><br/>
+                <InputGroup className="mb-3" bg="primary">
+                    <FormControl
+                    onChange={props.onChange4}
+                    placeholder={props.placeholder4}
+                    />
+                     <Button 
+                    variant="outline-secondary"
+                     id="button-addon2" 
+                     onClick={props.onClick4}>
+                    {props.button4}
+                    </Button>
+                    <Button 
+                    variant="outline-secondary"
+                     id="button-addon2" 
+                     onClick={props.onClick4a}>
+                    {props.button4a}
+                    </Button>
+                </InputGroup>
+                </Card.Body>
+             </Card>
+            </Col>
+                <Col>
+            <Card
+                bg="dark"
+                border="info"
+                text="white"
+            >
                 <Card.Header as="h4">{props.title2}</Card.Header>
                 <Card.Body>
                 <Card.Text as="h5">
@@ -87,6 +119,46 @@ const Cards = (props) => {
                 border="info"
                 text="white"
             >
+            <Card.Header as="h4">{props.title5}</Card.Header>
+                <Card.Body>
+                <Card.Text as="h5">
+                    {props.text5}
+                </Card.Text><br/>
+                <InputGroup className="mb-3" bg="primary">
+                    <FormControl
+                    onChange={props.onChange5}
+                    placeholder={props.placeholder5}
+                    />
+                    <Button 
+                    variant="outline-secondary"
+                     id="button-addon2" 
+                     onClick={props.onClick5}
+                     >
+                    {props.button5}
+                    </Button>
+                </InputGroup>
+                <InputGroup className="mb-3" bg="primary">
+                    <FormControl
+                    onChange={props.onChange5a}
+                    placeholder={props.placeholder5a}
+                    />
+                    <Button 
+                    variant="outline-secondary"
+                     id="button-addon2" 
+                     onClick={props.onClick5a}
+                     >
+                    {props.button5a}
+                    </Button>
+                </InputGroup>
+                </Card.Body>
+            </Card>
+            </Col>
+            <Col>
+            <Card
+                bg="dark"
+                border="info"
+                text="white"
+                >
                 <Card.Header as="h4">{props.title3}</Card.Header>
                 <Card.Body>
                 <Card.Text as="h5">
@@ -121,5 +193,3 @@ const Cards = (props) => {
   
 
 export default Cards;
-
-

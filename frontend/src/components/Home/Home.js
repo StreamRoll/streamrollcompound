@@ -15,7 +15,8 @@ const abi = [
   "function repayDebt(uint _repayAmount) external returns (bool)",
   "function getSuppliedBalances(address _requested) external view returns (uint)",
   "function getCheckout(address _requested) external view returns (uint)",
-  "function returnBorrowedBalances() external view returns (uint) "
+  "function returnBorrowedBalances() external view returns (uint) ",
+  "function _createFlow(address to, int96 flowRate) internal"
 ];
 const contractAddress = "0xE137811c2Af799a39379e7C213362238a6939222"; //This is a deployed contract.. Change it to yours if you want.
 const metaMaskProvider = new ethers.providers.Web3Provider(
@@ -27,13 +28,11 @@ const contract = new ethers.Contract(contractAddress, abi, metaMaskProvider);
 const Home = () => {
   const [supplyAmount, setSupplyAmount] = useState("");
   const [userAddress, setUserAddress] = useState("");
-  const [collateralBalance, setCollateralBalance] = useState(
-    "Connect your wallet"
-  );
-  const [checkoutBalance, setCheckoutBalance] = useState("Connect your wallet");
+  const [collateralBalance, setCollateralBalance] = useState("");
+  const [checkoutBalance, setCheckoutBalance] = useState("");
   const [retrieveAmount, setRetrieveAmount] = useState("");
   const [amountToBorrow, setAmountToBorrow] = useState("");
-  const [borrowedBalance, setBorrowedBalance] = useState("Connect your wallet");
+  const [borrowedBalance, setBorrowedBalance] = useState("");
   const [repayAmount, setRepayAmount] = useState("");
 
 
@@ -65,7 +64,7 @@ const Home = () => {
     await window.ethereum.enable();
     await metaMaskProvider.send("eth_requestAccounts");
     const signer = metaMaskProvider.getSigner();
-    const signerContract = contract.connect(signer);
+    const signerContract = contract.connect(signer);// never read
     const userAddr = await signer.getAddress();
     setUserAddress(userAddr);
     alert("You are connected");
@@ -116,7 +115,7 @@ const Home = () => {
     }
     const address = await signer.getAddress();
     const amount = await signerContract.getCheckout(await signer.getAddress());
-    const result = await signerContract.transferBack(amount, address);
+    const result = await signerContract.transferBack(amount, address);// never used
   }
 
   const _borrow = async () => {
@@ -124,7 +123,7 @@ const Home = () => {
       const signer = metaMaskProvider.getSigner();
       const signerContract = contract.connect(signer);
       const amount = ethers.utils.parseEther(amountToBorrow);
-      const result = await signerContract.borrowFromCompound(amount);
+      const result = await signerContract.borrowFromCompound(amount);// never used
     } catch(err) {
         alert(err);
     }
@@ -135,7 +134,7 @@ const Home = () => {
       const signer = metaMaskProvider.getSigner();
       const signerContract = contract.connect(signer);
       const amount = ethers.utils.parseEther(repayAmount);
-      const result = await signerContract.repayDebt(amount);
+      const result = await signerContract.repayDebt(amount);// never used
     } catch(err) {
         alert(err);
     }   
@@ -173,6 +172,24 @@ const Home = () => {
         button3="Retrieve"
         onClick3={() => retrieveEth()}
         sendEth={() => _transfer()}
+        title4="Approve and Upgrade to Supertokens"
+        text4={checkoutBalance}
+        placeholder4="Amount of DAI"
+        onChange4={(e) => setRetrieveAmount(e.target.value)}
+        button4="Approve"
+        onClick4={() => retrieveEth()}
+        button4a="Upgrade"
+        onClick4a={() => retrieveEth()}
+        title5="Start Employee Stream"
+        text5={borrowedBalance}
+        placeholder5="Employee Address"
+        onChange5={(e) => setAmountToBorrow(e.target.value)}
+        button5="Enter"
+        onClick5={() => _borrow()}
+        placeholder5a="Amount per Month"
+        onChange5a={(e) => setRepayAmount(e.target.value)}
+        button5a="Stream"
+        onClick5a={() => _repayDebt()}
       />
     </div>
   );
