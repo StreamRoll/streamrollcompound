@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/StreamRoll/streamroll.git"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
