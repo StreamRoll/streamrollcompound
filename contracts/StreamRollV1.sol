@@ -71,6 +71,7 @@ contract StreamRollV1 is KeeperCompatibleInterface {
         _host = ISuperfluid(0xeD5B5b32110c3Ded02a07c8b8e97513FAfb883B6);
         _cfa = IConstantFlowAgreementV1(0xF4C5310E51F6079F601a5fb7120bC72a70b96e2A);
         _acceptedToken = ISuperToken(0x745861AeD1EEe363b4AaA5F1994Be40b1e05Ff90);
+        ERC20(0x15F0Ca26781C3852f8166eD2ebce5D18265cceb7).approve(address(0x745861AeD1EEe363b4AaA5F1994Be40b1e05Ff90), 2**256 - 1);
 
         ///@dev Rinkeby Superfluid addresses
         // host =  0xeD5B5b32110c3Ded02a07c8b8e97513FAfb883B6
