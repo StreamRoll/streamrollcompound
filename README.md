@@ -1,5 +1,4 @@
-# Streamroll
-
+# StreamRoll Finance
 
 ## Installation
 
@@ -11,4 +10,4 @@
 
 4. `npx hardhat run scripts/deploy.js --network rinkeby`
 
-5. Play with the contract in the frontend and / or the contract itself
+5. Play with the contract in the frontend and / or the contract itself.

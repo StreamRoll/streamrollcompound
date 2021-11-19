@@ -19,7 +19,7 @@ import {
     IConstantFlowAgreementV1
 } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IConstantFlowAgreementV1.sol";
 
-// import {SuperAppBase} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBase.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
 
 ///@author StreamRoll team:)
@@ -27,7 +27,7 @@ import {
 ///@notice it accepts eth as collateral and exchanges it for
 ///cEth.. Everything happens inside the contract, behaving like a pool.
 /// It then streams chunks to the desired accounts.
-contract StreamRollV1 {
+contract StreamRollV1 is KeeperCompatibleInterface {
     
     ICETH cEth;
     ICERC20 cDai;
@@ -173,13 +173,31 @@ contract StreamRollV1 {
         return borrowedBalances[msg.sender];
     }
 
+    /**************************************************************************
+     * Chainlink Keeper Logic   
+     *************************************************************************/
+
+    function checkUpKeep(bytes calldata checkData) external returns (bool, bytes) {
+        // logic
+       
+        return (needsUpKeep, payload);
+    }
+
+    function performUpKeep(bytes calldata performData) external {
+        // execute only the work that must be done on chain
+    }
 
     /**************************************************************************
      * Approve/Upgrade logic
      *************************************************************************/
 
-
-
+    //ISuperToken(superTokenAddress).downgrade(uint256 amount);
+    //ISuperToken(superTokenAddress).upgrade(uint256 amount);
+    //ISuperToken(superTokenAddress).approve(address spender, uint256 amount);
+    //ISuperToken(superTokenAddress).transferFrom(address from, address to, uint256 amount);
+    //ISuperToken(superTokenAddress).transfer(address to, uint256 amount);
+    //ISuperToken(superTokenAddress).burn(uint256 amount);
+    //ISuperToken(superTokenAddress).mint(uint256 amount);
 
 
 
